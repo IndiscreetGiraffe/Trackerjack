@@ -229,4 +229,11 @@ if (question.trackerAction === "Update employee role") {
    
 }
 
+if (question.trackerAction === 'Quit') {
+    console.log("Leaving already? Good afternoon, Good evening, and Goodnight! Press CTRL C to exit");
+    return;
+}
+startQuestions();
+};
+
 
