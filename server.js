@@ -1,6 +1,7 @@
 const express = require('express');
 const inputCheck = require('./utils/inputCheck');
 const db = require('./db/connection');
+const EditorPrompt = require('inquirer/lib/prompts/editor');
 
 const PORT = process.env.PORT || 3001;
 
@@ -21,6 +22,29 @@ app.get('/api/department', (req, res) => {
         res.json({
             message: 'success',
             data: row
+        });
+    });
+});
+
+app.post('/app/department', ({ body }, res) => {
+    const errors = inputCheck(body, 'department_name');
+    if (errors) {
+        res.status(400).json({ error: errors });
+        return;
+    }
+
+    const sql = `INSERT INTO department (department_name)
+                    VALUES (?)`;
+    const params = [body.department_name];
+
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            res.status(400).json({ error: err.message });
+            return;
+        }
+        res.json({
+            message: 'success',
+            data: body
         });
     });
 });
