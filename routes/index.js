@@ -236,4 +236,21 @@ if (question.trackerAction === 'Quit') {
 startQuestions();
 };
 
+const viewDepartments = () => {
+
+    departments = [];
+
+    db.query(`SELECT * FROM department`, (err, row) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        for (let i = 0; i < row.length; i++) {
+            departments.push(row[i]);
+        }
+        console.table('', departments);
+        console.log('Press the down arrow to perform another action');
+    })
+
+};
 
