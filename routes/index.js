@@ -153,3 +153,29 @@ async function startQuestions() {
         }
 
         addEmployee();
+
+    }
+ 
+if (question.trackerAction === 'Add a department') {
+    newDepartment = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'newDepartment',
+            message: "What is the new Department name? (Required)",
+            validate: newDepartment => {
+                if (newDepartment) {
+                    return true;
+                } else {
+                    console.log("Please enter a name!")
+                }
+            }
+        }
+    ])
+    if (newDepartment) {
+
+        departments.push(newDepartment);
+        
+    }
+    addDepartment();
+   
+}
