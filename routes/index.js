@@ -9,7 +9,7 @@ let employees = [];
 let updatedRole = [];
 
 console.log("------------------Tracker Jack---------------------");
-// function that starts the questions
+
 async function startQuestions() {
     const question = await inquirer.prompt([
         {
@@ -20,17 +20,63 @@ async function startQuestions() {
         }
     ])
 
-    // if the user decides to view all departments show all departments 
     if (question.trackerAction === 'View all departments') {
         viewDepartments();
        
 
     }
-
-
-
-    // if the user decides to view all roles show all roles 
+ 
     if (question.trackerAction === "View all roles") {
         viewRoles();
+        
+    }
+
+    if (question.trackerAction === "View all employees") {
+        viewEmployees();
+       
+    }
+
+    let newRole
+    if (question.trackerAction === "Add a role") {
+        newRole = await inquirer.prompt([
+            {
+                type: 'input',
+                name: 'newRoleTitle',
+                message: "What is the title of the new role? (Required)",
+                validate: newRoleTitle => {
+                    if (newRoleTitle) {
+                        return true;
+                    } else {
+                        console.log("Please enter a role title")
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'newRoleSalary',
+                message: "What is the new role's salary? (Required)",
+                validate: newRoleSalary => {
+                    if (newRoleSalary) {
+                        return true;
+                    } else {
+                        console.log("Please enter the role's salary")
+                    }
+                }
+            },
+            {
+                type: 'list',
+                name: 'departmentID',
+                message: "What department does the new role belong to?",
+                choices: ['1', '2', '3', '4']
+            }
+
+        ])
+        if (newRole) {
+
+            roles.push(newRole)
+            
+        }
+
+        addRole();
         
     }
