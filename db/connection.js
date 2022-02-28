@@ -5,7 +5,7 @@ const db = mysql.createConnection(
         host: 'localhost',
         user: 'root',
         password: 'Octavia6114!',
-        database: 'workerbees'
+        database: 'employees'
     },
     console.log('Youre connected to the hive')
 );
