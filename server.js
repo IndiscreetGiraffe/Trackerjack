@@ -84,3 +84,20 @@ app.post('/api/employeerole', ({ body }, res) => {
         });
     });
 });
+
+app.get('/api/employee', (req, res) => {
+    const sql = `SELECT * FROM employee`;
+
+    db.query(sql, (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json({
+            message: 'success',
+            data: row
+        });
+    });
+});
+
+
