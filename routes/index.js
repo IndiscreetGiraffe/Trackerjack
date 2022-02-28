@@ -54,7 +54,7 @@ async function startQuestions() {
             {
                 type: 'input',
                 name: 'newRoleSalary',
-                message: "What is the new role's salary? (Required)",
+                message: "What is the salary? (Required)",
                 validate: newRoleSalary => {
                     if (newRoleSalary) {
                         return true;
