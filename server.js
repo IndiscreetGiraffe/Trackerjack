@@ -48,3 +48,20 @@ app.post('/app/department', ({ body }, res) => {
         });
     });
 });
+
+app.get('/api/employeerole', (req, res) => {
+    const sql = `SELECT * FROM employeerole`;
+
+    db.query(sql, (err, row) => {
+        if (err) {
+            res.status(400).json({ error: "error"});
+            return;
+        }
+        res.json({
+            message: 'success',
+            data: row
+        });
+    });
+});
+
+
