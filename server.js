@@ -1,5 +1,26 @@
-const { express } = require('express');
+const express = require('express');
+const inputCheck = require('./utils/inputCheck');
 const db = require('./db/connection');
-const inquirer = require('inquirer');
-const cTable = require('console.table');
 
+const PORT = process.env.PORT || 3001;
+
+const app = express();
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+
+app.get('/api/department', (req, res) => {
+    const sql = `SELECT * FROM department`;
+
+    db.query(sql, (err, row) => {
+        if (err) {
+            res.status(500).json({ error: "Error"});
+            return;
+        }
+        res.json({
+            message: 'success',
+            data: row
+        });
+    });
+});
