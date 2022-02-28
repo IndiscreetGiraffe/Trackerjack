@@ -64,4 +64,23 @@ app.get('/api/employeerole', (req, res) => {
     });
 });
 
+app.post('/api/employeerole', ({ body }, res) => {
+    const errors = inputCheck(body, 'title', 'salary', 'department_id');
+    if (errors) {
+        res.status(400).json({ error: errors });
+        return;
+    }
 
+    const sql = `INSERT INTO employeerole (title, salary, department_id)
+                    VALUES (?, ?, ?)`;
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            res.status(400).json({ error: "error" });
+            return;
+        }
+        res.json({
+            message: 'success',
+            data: body
+        });
+    });
+});
