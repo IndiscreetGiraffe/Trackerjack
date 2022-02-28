@@ -293,3 +293,58 @@ const viewEmployees = () => {
         console.log('Press the down arrow to perform another action');
     })
 };
+
+const addRole = () => {
+
+
+    const params = [roles[roles.length-1].newRoleTitle, roles[roles.length-1].newRoleSalary, roles[roles.length-1].departmentID];
+
+    db.query(`INSERT INTO employeerole (title, salary, department_id)
+    VALUES (?, ?, ?)`, params, (err, res) => {
+        if (err) {
+
+            return;
+        }
+
+    });
+
+    console.log('The role has been added! Congrats!')
+    console.log('Use the down to perform another action');
+
+};
+
+const addEmployee = () => {
+
+    const params = [employees[employees.length-1].newEmployeeFirstName, employees[employees.length-1].newEmployeeLastName, employees[employees.length-1].roleID, employees[employees.length-1].managerName, employees[employees.length-1].departmentID];
+    
+    db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_name, department_id)
+    VALUES (?, ?, ?, ?, ?)`, params, (err, res) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+
+        console.log('', "The employee has been added, yay!")
+        console.log("Use the down arrow to perform another action");
+
+    });
+
+};
+
+const addDepartment = () => {
+    const params = [departments[departments.length-1].newDepartment];
+    
+    db.query(`INSERT INTO department (department_name)
+    VALUES (?)`, params, (err, res) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        console.log("This department has now been added!")
+        console.log("Use the down arrow to perform another action");
+    });
+};
+
+startQuestions();
